@@ -3,17 +3,20 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		6900F5E121BF4726007AFBB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6900F5E021BF4726007AFBB8 /* Assets.xcassets */; };
+		A10613C725D58F9700D91DE8 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = A10613C625D58F9700D91DE8 /* Lottie */; };
+		A10613CE25D5943200D91DE8 /* confetti.json in Resources */ = {isa = PBXBuildFile; fileRef = A10613CD25D5943200D91DE8 /* confetti.json */; };
 		A15A47EB25D498F100553925 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15A47EA25D498F100553925 /* AudioPlayer.swift */; };
 		A15A47F525D4A82A00553925 /* LoginClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15A47F425D4A82A00553925 /* LoginClient.swift */; };
 		A15A47F825D4AEA100553925 /* ChatClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15A47F725D4AEA100553925 /* ChatClient.swift */; };
 		A18061DD25D4D1A700856E6E /* logo_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A18061DC25D4D1A700856E6E /* logo_sound.mp3 */; };
 		A18061E425D4DB1500856E6E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18061E325D4DB1500856E6E /* Message.swift */; };
 		A18061E725D4DB4200856E6E /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18061E625D4DB4200856E6E /* ChatViewModel.swift */; };
+		A3E2089E0F78A14100A8642B /* Pods_iOSTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1834C4A0727BCF5D4F0F3C9A /* Pods_iOSTest.framework */; };
 		F21312E11E0485B50029E33F /* AnimationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F21312DF1E0485B50029E33F /* AnimationViewController.xib */; };
 		F2603FCB202A404D001BCA22 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2603FC9202A404D001BCA22 /* ChatTableViewCell.swift */; };
 		F2603FCE202A407C001BCA22 /* AnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2603FCD202A407C001BCA22 /* AnimationViewController.swift */; };
@@ -30,13 +33,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1834C4A0727BCF5D4F0F3C9A /* Pods_iOSTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3ECC03CD9D223F88469BA050 /* Pods-iOSTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSTest.release.xcconfig"; path = "Target Support Files/Pods-iOSTest/Pods-iOSTest.release.xcconfig"; sourceTree = "<group>"; };
 		6900F5E021BF4726007AFBB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A10613CD25D5943200D91DE8 /* confetti.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = confetti.json; sourceTree = "<group>"; };
+		A128F1C525D58CF1005D22E8 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A15A47EA25D498F100553925 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		A15A47F425D4A82A00553925 /* LoginClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginClient.swift; sourceTree = "<group>"; };
 		A15A47F725D4AEA100553925 /* ChatClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatClient.swift; sourceTree = "<group>"; };
 		A18061DC25D4D1A700856E6E /* logo_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = logo_sound.mp3; sourceTree = "<group>"; };
 		A18061E325D4DB1500856E6E /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		A18061E625D4DB4200856E6E /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		A18061EE25D58B2A00856E6E /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE4E9272792E9F1734A87696 /* Pods-iOSTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSTest.debug.xcconfig"; path = "Target Support Files/Pods-iOSTest/Pods-iOSTest.debug.xcconfig"; sourceTree = "<group>"; };
 		F21312DF1E0485B50029E33F /* AnimationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AnimationViewController.xib; path = "View Controllers/AnimationViewController.xib"; sourceTree = "<group>"; };
 		F2603FC9202A404D001BCA22 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatTableViewCell.swift; path = Views/Cells/ChatTableViewCell.swift; sourceTree = "<group>"; };
 		F2603FCD202A407C001BCA22 /* AnimationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnimationViewController.swift; path = "View Controllers/AnimationViewController.swift"; sourceTree = "<group>"; };
@@ -62,12 +71,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				F273B8341D95C3000069037F /* ImageIO.framework in Frameworks */,
+				A3E2089E0F78A14100A8642B /* Pods_iOSTest.framework in Frameworks */,
+				A10613C725D58F9700D91DE8 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BD0374F39C647A31190304BB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CE4E9272792E9F1734A87696 /* Pods-iOSTest.debug.xcconfig */,
+				3ECC03CD9D223F88469BA050 /* Pods-iOSTest.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		F21312DC1E0485A50029E33F /* Animation */ = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +103,7 @@
 				F264BD9B1D7F4F0400275D46 /* iOSTest */,
 				F264BD9A1D7F4F0400275D46 /* Products */,
 				F273B8321D95C3000069037F /* Frameworks */,
+				BD0374F39C647A31190304BB /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -113,6 +134,7 @@
 		F264BD9C1D7F4F0400275D46 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A10613CD25D5943200D91DE8 /* confetti.json */,
 				A18061DC25D4D1A700856E6E /* logo_sound.mp3 */,
 				A15A47EA25D498F100553925 /* AudioPlayer.swift */,
 				F264BD9D1D7F4F0400275D46 /* main.m */,
@@ -125,10 +147,10 @@
 		F264BDB81D7F503A00275D46 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F21312DC1E0485A50029E33F /* Animation */,
-				F2837BEC1D9AE97700A57AC8 /* Chat */,
-				F2837BED1D9AE97C00A57AC8 /* Login */,
 				F2837BEB1D9AE96D00A57AC8 /* Main Menu */,
+				F2837BEC1D9AE97700A57AC8 /* Chat */,
+				F21312DC1E0485A50029E33F /* Animation */,
+				F2837BED1D9AE97C00A57AC8 /* Login */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -161,7 +183,10 @@
 		F273B8321D95C3000069037F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A128F1C525D58CF1005D22E8 /* Lottie.framework */,
+				A18061EE25D58B2A00856E6E /* Lottie.framework */,
 				F273B8331D95C3000069037F /* ImageIO.framework */,
+				1834C4A0727BCF5D4F0F3C9A /* Pods_iOSTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -209,6 +234,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F264BDB01D7F4F0500275D46 /* Build configuration list for PBXNativeTarget "iOSTest" */;
 			buildPhases = (
+				68F1CB535993D47F2D722896 /* [CP] Check Pods Manifest.lock */,
 				F264BD951D7F4F0400275D46 /* Sources */,
 				F264BD961D7F4F0400275D46 /* Frameworks */,
 				F264BD971D7F4F0400275D46 /* Resources */,
@@ -218,6 +244,9 @@
 			dependencies = (
 			);
 			name = iOSTest;
+			packageProductDependencies = (
+				A10613C625D58F9700D91DE8 /* Lottie */,
+			);
 			productName = iOSTest;
 			productReference = F264BD991D7F4F0400275D46 /* iOSTest.app */;
 			productType = "com.apple.product-type.application";
@@ -248,6 +277,9 @@
 				Base,
 			);
 			mainGroup = F264BD901D7F4F0400275D46;
+			packageReferences = (
+				A10613C525D58F9700D91DE8 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			productRefGroup = F264BD9A1D7F4F0400275D46 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -263,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A18061DD25D4D1A700856E6E /* logo_sound.mp3 in Resources */,
+				A10613CE25D5943200D91DE8 /* confetti.json in Resources */,
 				F264BDD71D7F642200275D46 /* LoginViewController.xib in Resources */,
 				F264BDBE1D7F52E500275D46 /* LaunchScreen.xib in Resources */,
 				F264BDB71D7F503300275D46 /* MenuViewController.xib in Resources */,
@@ -273,6 +306,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		68F1CB535993D47F2D722896 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOSTest-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F264BD951D7F4F0400275D46 /* Sources */ = {
@@ -404,6 +462,7 @@
 		};
 		F264BDB11D7F4F0500275D46 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE4E9272792E9F1734A87696 /* Pods-iOSTest.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -414,7 +473,10 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = iOSTest/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rapptrlabs.iOSTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -428,6 +490,7 @@
 		};
 		F264BDB21D7F4F0500275D46 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3ECC03CD9D223F88469BA050 /* Pods-iOSTest.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -438,7 +501,10 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = iOSTest/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rapptrlabs.iOSTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -471,6 +537,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A10613C525D58F9700D91DE8 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A10613C625D58F9700D91DE8 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A10613C525D58F9700D91DE8 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F264BD911D7F4F0400275D46 /* Project object */;
 }

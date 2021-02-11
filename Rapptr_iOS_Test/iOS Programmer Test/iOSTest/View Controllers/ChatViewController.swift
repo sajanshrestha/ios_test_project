@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ChatViewController: UIViewController {
     
     /**
      * =========================================================================================
@@ -40,14 +40,15 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         title = "Chat"
-        
         configureTable()
-        
         model.delegate = self
+        
+        addLoadingSpinner()
+        updateUIwithLoadingStatus()
     }
     
-    // MARK: - Private
     private func configureTable() {
         chatTable.delegate = self
         chatTable.dataSource = self
@@ -56,18 +57,30 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         chatTable.rowHeight = UITableView.automaticDimension
         chatTable.estimatedRowHeight = 600
         chatTable.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
-    }
-        
-    // MARK: - UITableViewDataSource
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ChatTableViewCell.identifier) as! ChatTableViewCell
-        let message = model.messages[indexPath.row]
-        cell.avatarImageView.image = getImage(for: message.avatarUrl)
-        cell.header.text = message.name
-        cell.body.text = message.message
-        return cell
+        chatTable.allowsSelection = false
     }
     
+    private func addLoadingSpinner() {
+        view.addSubview(loadingSpinner)
+        NSLayoutConstraint.activate([
+            loadingSpinner.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadingSpinner.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            loadingSpinner.heightAnchor.constraint(equalToConstant: 60),
+            loadingSpinner.widthAnchor.constraint(equalToConstant: 60)
+        ])
+    }
+    
+    private func updateUIwithLoadingStatus() {
+        if model.isLoading {
+            loadingSpinner.startAnimating()
+            chatTable.isHidden = true
+        }
+        else {
+            loadingSpinner.stopAnimating()
+            chatTable.isHidden = false
+        }
+    }
+      
     private func getImage(for url: String) -> UIImage {
         var image = UIImage(named: "user")!
         do {
@@ -86,12 +99,36 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         model.messages.count
     }
     
+    // MARK: - Views
+    var loadingSpinner: UIActivityIndicatorView = {
+        var view = UIActivityIndicatorView()
+        if #available(iOS 13.0, *) { view.style = .large }
+        else { view.style = .gray }
+        view.color = #colorLiteral(red: 0.2616125047, green: 0.4031680822, blue: 0.4401500523, alpha: 1)
+        view.hidesWhenStopped = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+}
+
+
+extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ChatTableViewCell.identifier) as! ChatTableViewCell
+        let message = model.messages[indexPath.row]
+        cell.avatarImageView.image = getImage(for: message.avatarUrl)
+        cell.header.text = message.name
+        cell.body.text = message.message
+        return cell
+    }
 }
 
 
 extension ChatViewController: ChatMessageDelegate {
     func didSetMessages() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [self] in
+            updateUIwithLoadingStatus()
             self.chatTable.reloadData()
         }
     }

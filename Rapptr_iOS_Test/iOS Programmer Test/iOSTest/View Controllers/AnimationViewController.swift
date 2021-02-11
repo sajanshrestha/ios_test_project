@@ -5,7 +5,7 @@
 //  Copyright © 2020 Rapptr Labs. All rights reserved.
 
 import UIKit
-import Combine
+import Lottie
 
 class AnimationViewController: UIViewController {
     
@@ -27,19 +27,33 @@ class AnimationViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var fadeInButton: UIButton!
-        
+    @IBOutlet weak var backgroundView: UIView!
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Animation"
         
         addPanGesture()
+        addAnimationView()
+        animationView.isHidden = true
     }
     
     private func addPanGesture() {
         logoImageView.isUserInteractionEnabled = true
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
         logoImageView.addGestureRecognizer(panGesture)
+    }
+    
+    private func addAnimationView() {
+        backgroundView.addSubview(animationView)
+        
+        NSLayoutConstraint.activate([
+            animationView.topAnchor.constraint(equalTo: view.topAnchor),
+            animationView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            animationView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            animationView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
     }
     
     @objc func handlePanGesture(gesture: UIPanGestureRecognizer) {
@@ -49,16 +63,31 @@ class AnimationViewController: UIViewController {
             logoImageView.transform = CGAffineTransform(translationX: translation.x, y: translation.y)
         }
         else if gesture.state == .ended {
-            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: .curveEaseIn) {
-                self.logoImageView.transform = .identity
-            }
-            AudioPlayer.playSound(for: "logo_sound")
+            moveLogoToStartingPosition()
         }
+    }
+    
+    private func moveLogoToStartingPosition() {
+        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: .curveEaseIn) {
+            self.logoImageView.transform = .identity
+        }
+        AudioPlayer.playSound(for: "logo_sound")
     }
 
     @IBAction func didPressFade(_ sender: Any) {
         logoImageView.fade(duration: animationDuration)
         updateButtonTitle()
+        if logoVisible {
+            // start confetti after a delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + animationDuration) {
+                self.animationView.isHidden = false
+                self.animationView.play()
+            }
+        }
+        else {
+            self.animationView.isHidden = true
+            self.animationView.stop()
+        }
     }
     
     private func updateButtonTitle() {
@@ -72,6 +101,17 @@ class AnimationViewController: UIViewController {
     
     // MARK: - Constants
     private let animationDuration: TimeInterval = 1.2
+    
+    
+    // MARK: - Views
+    var animationView: AnimationView = {
+        var view = AnimationView()
+        view.animation = Animation.named("confetti")
+        view.contentMode = .scaleAspectFit
+        view.loopMode = .repeat(3.0)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 }
 
 

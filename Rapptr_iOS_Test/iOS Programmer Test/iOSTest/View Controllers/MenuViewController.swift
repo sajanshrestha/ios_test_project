@@ -36,9 +36,9 @@ class MenuViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setUpNavigationBar()
         setUpButtons(chatButton, loginButton, animationButton)
-        
     }
     
     // MARK: - Constants

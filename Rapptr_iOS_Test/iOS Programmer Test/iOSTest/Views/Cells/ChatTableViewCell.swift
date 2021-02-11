@@ -64,7 +64,7 @@ class ChatTableViewCell: UITableViewCell {
     // MARK: - Constants
     private let messageFontSize: CGFloat = 15.0
     private let userNameFontSize: CGFloat = 13.0
-    private let imageViewWidth: CGFloat = 60.0
+    private let imageViewWidth: CGFloat = 50.0
     private let messageTextInset: CGFloat = 8.0
 }
 

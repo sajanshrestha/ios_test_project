@@ -10,9 +10,16 @@ import Foundation
 
 class ChatViewModel {
     
-    var messages = [Message]() { didSet { delegate.didSetMessages() } }
+    var messages = [Message]() {
+        didSet {
+            isLoading = false
+            delegate.didSetMessages()
+        }
+    }
     
     var delegate: ChatMessageDelegate!
+    
+    var isLoading = true
     
     init() {
         ChatClient.getMessages { messages in
