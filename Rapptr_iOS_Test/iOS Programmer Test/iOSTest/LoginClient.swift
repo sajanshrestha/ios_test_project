@@ -12,7 +12,7 @@ struct LoginClient {
     
     static func login(email: String, password: String, completion: @escaping (Bool) -> Void) {
         
-        guard let url = URL(string: "http://dev.rapptrlabs.com/Tests/scripts/login.php") else { return }
+        guard let url = URL(string: Endpoint.loginUrl) else { return }
         let request = URLRequest(url: url)
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if error == nil {

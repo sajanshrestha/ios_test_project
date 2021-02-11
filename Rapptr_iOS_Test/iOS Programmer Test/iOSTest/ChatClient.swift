@@ -9,8 +9,11 @@
 import Foundation
 
 struct ChatClient {
-    static func getMessages(completion: @escaping (([MyMessage]) -> Void)) {
-        guard let url = URL(string: "http://dev.rapptrlabs.com/Tests/scripts/chat_log.php") else { return }
+    
+    static func getMessages(completion: @escaping (([Message]) -> Void)) {
+        
+        guard let url = URL(string: Endpoint.chatMessagesUrl) else { return }
+        
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data else { return }
             do {
@@ -24,44 +27,7 @@ struct ChatClient {
     }
 }
 
-
-struct MessageResponse: Codable {
-    var data: [MyMessage]
-}
-
-struct MyMessage: Codable {
-    var userId: String
-    var name: String
-    var avatarUrl: String
-    var message: String
-    
-    enum CodingKeys: String, CodingKey {
-        case userId = "user_id"
-        case name
-        case avatarUrl = "avatar_url"
-        case message
-    }
-}
-
-class ChatViewModel {
-    var messages = [MyMessage]() {
-        didSet {
-            delegate.didSetMessages()
-        }
-    }
-    
-    var delegate: ChatMessageDelegate!
-    
-    init() {
-        ChatClient.getMessages { messages in
-            DispatchQueue.main.async {
-                self.messages = messages
-            }
-        }
-    }
-}
-
-
-protocol ChatMessageDelegate {
-    func didSetMessages()
+struct Endpoint {
+    static let chatMessagesUrl = "http://dev.rapptrlabs.com/Tests/scripts/chat_log.php"
+    static let loginUrl = "http://dev.rapptrlabs.com/Tests/scripts/login.php"
 }

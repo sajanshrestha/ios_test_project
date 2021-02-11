@@ -27,6 +27,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - Outlets
     @IBOutlet weak var chatTable: UITableView!
     
+    // MARK: - Initializers
     init(model: ChatViewModel) {
         self.model = model
         super.init(nibName: nil, bundle: nil)
@@ -51,7 +52,6 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         chatTable.delegate = self
         chatTable.dataSource = self
         chatTable.register(ChatTableViewCell.self, forCellReuseIdentifier: ChatTableViewCell.identifier)
-        //tableView.tableFooterView = UIView(frame: .zero)
         chatTable.separatorStyle = .none
         chatTable.rowHeight = UITableView.automaticDimension
         chatTable.estimatedRowHeight = 600
@@ -60,16 +60,16 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ChatTableViewCell.identifier) as? ChatTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ChatTableViewCell.identifier) as! ChatTableViewCell
         let message = model.messages[indexPath.row]
-        cell?.avatarImageView.image = getImage(for: message.avatarUrl)
-        cell?.header.text = message.name
-        cell?.body.text = message.message
-        return cell!
+        cell.avatarImageView.image = getImage(for: message.avatarUrl)
+        cell.header.text = message.name
+        cell.body.text = message.message
+        return cell
     }
     
     private func getImage(for url: String) -> UIImage {
-        var image = UIImage()
+        var image = UIImage(named: "user")!
         do {
             if let url = URL(string: url) {
                 let data = try Data(contentsOf: url)
@@ -91,6 +91,8 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
 extension ChatViewController: ChatMessageDelegate {
     func didSetMessages() {
-        chatTable.reloadData()
+        DispatchQueue.main.async {
+            self.chatTable.reloadData()
+        }
     }
 }
