@@ -5,6 +5,7 @@
 //  Copyright © 2020 Rapptr Labs. All rights reserved.
 
 import UIKit
+import SVProgressHUD
 
 class ChatViewController: UIViewController {
     
@@ -21,13 +22,14 @@ class ChatViewController: UIViewController {
      *
      **/
     
+    
     // MARK: - Properties
     var model: ChatViewModel
     
     // MARK: - Outlets
     @IBOutlet weak var chatTable: UITableView!
     
-    // MARK: - Initializers
+    // MARK: - Initializerss
     init(model: ChatViewModel) {
         self.model = model
         super.init(nibName: nil, bundle: nil)
@@ -35,6 +37,11 @@ class ChatViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        SVProgressHUD.dismiss()
     }
     
     // MARK: - Lifecycle
@@ -45,7 +52,6 @@ class ChatViewController: UIViewController {
         configureTable()
         model.delegate = self
         
-        addLoadingSpinner()
         updateUIwithLoadingStatus()
     }
     
@@ -60,34 +66,22 @@ class ChatViewController: UIViewController {
         chatTable.allowsSelection = false
     }
     
-    private func addLoadingSpinner() {
-        view.addSubview(loadingSpinner)
-        NSLayoutConstraint.activate([
-            loadingSpinner.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loadingSpinner.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            loadingSpinner.heightAnchor.constraint(equalToConstant: 60),
-            loadingSpinner.widthAnchor.constraint(equalToConstant: 60)
-        ])
-    }
-    
     private func updateUIwithLoadingStatus() {
         if model.isLoading {
-            loadingSpinner.startAnimating()
+            SVProgressHUD.show()
             chatTable.isHidden = true
         }
         else {
-            loadingSpinner.stopAnimating()
+            SVProgressHUD.dismiss()
             chatTable.isHidden = false
         }
     }
       
-    private func getImage(for url: String) -> UIImage {
+    private func getImage(for url: URL) -> UIImage {
         var image = UIImage(named: "user")!
         do {
-            if let url = URL(string: url) {
-                let data = try Data(contentsOf: url)
-                image = UIImage(data: data) ?? UIImage()
-            }
+            let data = try Data(contentsOf: url)
+            image = UIImage(data: data) ?? UIImage()
         }
         catch {
             print("error")
@@ -98,17 +92,6 @@ class ChatViewController: UIViewController {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         model.messages.count
     }
-    
-    // MARK: - Views
-    var loadingSpinner: UIActivityIndicatorView = {
-        var view = UIActivityIndicatorView()
-        if #available(iOS 13.0, *) { view.style = .large }
-        else { view.style = .gray }
-        view.color = #colorLiteral(red: 0.2616125047, green: 0.4031680822, blue: 0.4401500523, alpha: 1)
-        view.hidesWhenStopped = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
 }
 
 
@@ -117,9 +100,13 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ChatTableViewCell.identifier) as! ChatTableViewCell
         let message = model.messages[indexPath.row]
-        cell.avatarImageView.image = getImage(for: message.avatarUrl)
-        cell.header.text = message.name
-        cell.body.text = message.message
+        cell.header.text = message.username
+        cell.body.text = message.text
+        cell.avatarImageView.image = getImage(for:  message.avatarURL)
+
+//        cell.avatarImageView.image = getImage(for: message.avatarUrl)
+//        cell.header.text = message.name
+//        cell.body.text = message.message
         return cell
     }
 }
@@ -128,8 +115,14 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
 extension ChatViewController: ChatMessageDelegate {
     func didSetMessages() {
         DispatchQueue.main.async { [self] in
-            updateUIwithLoadingStatus()
-            self.chatTable.reloadData()
+            
+            // this delay is just to simulate a little longer network call
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                updateUIwithLoadingStatus()
+                self.chatTable.reloadData()
+            }
         }
     }
 }
+
+

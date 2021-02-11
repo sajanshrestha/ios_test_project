@@ -27,7 +27,7 @@ class AnimationViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var fadeInButton: UIButton!
-    @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet weak var animationContainerView: UIView!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -46,7 +46,7 @@ class AnimationViewController: UIViewController {
     }
     
     private func addAnimationView() {
-        backgroundView.addSubview(animationView)
+        animationContainerView.addSubview(animationView)
         
         NSLayoutConstraint.activate([
             animationView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -77,8 +77,16 @@ class AnimationViewController: UIViewController {
     @IBAction func didPressFade(_ sender: Any) {
         logoImageView.fade(duration: animationDuration)
         updateButtonTitle()
+        updateAnimationView()
+    }
+    
+    private func updateButtonTitle() {
+        let title = logoVisible ? "FADE OUT" : "FADE IN"
+        fadeInButton.setTitle(title, for: .normal)
+    }
+    
+    private func updateAnimationView() {
         if logoVisible {
-            // start confetti after a delay
             DispatchQueue.main.asyncAfter(deadline: .now() + animationDuration) {
                 self.animationView.isHidden = false
                 self.animationView.play()
@@ -90,23 +98,18 @@ class AnimationViewController: UIViewController {
         }
     }
     
-    private func updateButtonTitle() {
-        let title = logoVisible ? "FADE OUT" : "FADE IN"
-        fadeInButton.setTitle(title, for: .normal)
-    }
-    
     private var logoVisible: Bool {
         logoImageView.layer.opacity != 0.0
     }
     
     // MARK: - Constants
-    private let animationDuration: TimeInterval = 1.2
+    private let animationDuration: TimeInterval = 1.0
     
     
     // MARK: - Views
     var animationView: AnimationView = {
         var view = AnimationView()
-        view.animation = Animation.named("confetti")
+        view.animation = Animation.named("fireworks")
         view.contentMode = .scaleAspectFit
         view.loopMode = .repeat(3.0)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -118,7 +121,7 @@ class AnimationViewController: UIViewController {
 extension UIView {
     
     func fade(duration: TimeInterval) {
-        UIView.animate(withDuration: duration, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: .curveEaseIn) {
+        UIView.animate(withDuration: duration) {
             self.layer.opacity = self.layer.opacity == 0.0 ? 1.0 : 0.0
         }
     }

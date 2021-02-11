@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AnimationViewController">
             <connections>
-                <outlet property="backgroundView" destination="bdy-x0-9Ah" id="p6m-QO-0dM"/>
+                <outlet property="animationContainerView" destination="bdy-x0-9Ah" id="p6m-QO-0dM"/>
                 <outlet property="fadeInButton" destination="R4X-eb-ZnV" id="Flg-mN-ar8"/>
                 <outlet property="logoImageView" destination="5DT-RY-uzd" id="iuX-A6-tEs"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

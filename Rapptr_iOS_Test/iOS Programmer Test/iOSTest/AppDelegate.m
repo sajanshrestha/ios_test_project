@@ -6,6 +6,7 @@
 
 #import "AppDelegate.h"
 #import "iOSTest-Swift.h"
+#import "SVProgressHUD.h"
 
 @interface AppDelegate ()
 @property (nonatomic, strong) UINavigationController *navController;
@@ -24,6 +25,10 @@
     self.navController = [[UINavigationController alloc] initWithRootViewController:mainMenuViewController];
     [self.navController setNavigationBarHidden:NO];
     self.window.rootViewController = self.navController;
+    
+    [SVProgressHUD setRingRadius:1.0];
+    [SVProgressHUD setForegroundColor:UIColor.blueColor];
+    
 
     return YES;
 }

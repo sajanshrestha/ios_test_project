@@ -36,17 +36,20 @@ class LoginViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         title = "Login"
+        setUpTextFields()
+    }
+    
+    private func setUpTextFields() {
+        emailTextField.setTextInset()
+        passwordTextField.setTextInset()
+                
+        emailTextField.textColor = UIColor(red: 0.106, green: 0.118, blue: 0.122, alpha: 1)
+        passwordTextField.textColor = UIColor(red: 0.106, green: 0.118, blue: 0.122, alpha: 1)
         
-        let emailPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 24, height: 0))
-        emailTextField.leftView = emailPaddingView
-        emailTextField.leftViewMode = .always
-        emailTextField.layer.opacity = 0.5
-        
-        let passwordPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 24, height: 0))
-        passwordTextField.leftView = passwordPaddingView
-        passwordTextField.leftViewMode = .always
-        passwordTextField.layer.opacity = 0.5  
+        emailTextField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [.font: UIFont.systemFont(ofSize: 16, weight: .regular), .foregroundColor: UIColor(red: 0.373, green: 0.376, blue: 0.388, alpha: 1)])
+        passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [.font: UIFont.systemFont(ofSize: 16, weight: .regular), .foregroundColor: UIColor(red: 0.373, green: 0.376, blue: 0.388, alpha: 1)])
     }
     
     override func didReceiveMemoryWarning() {
@@ -57,21 +60,36 @@ class LoginViewController: UIViewController {
     @IBAction func didPressLoginButton(_ sender: Any) {
         let userEmail = emailTextField.text!
         let userPassword = passwordTextField.text!
-        LoginClient.login(email: userEmail, password: userPassword) { success in
+        LoginClient.login(email: userEmail, password: userPassword) { success, timeInterval in
             if success {
                 DispatchQueue.main.async {
-                    self.presentAlertController()
+                    let message = "Time taken: \(Double(timeInterval ?? TimeInterval.zero) * 1000) milliseconds"
+                    self.presentAlertController(with: message)
                 }
             }
         }
     }
     
-    private func presentAlertController() {
-        let alertController = UIAlertController(title: "Success", message: "It took 3 seconds for the call", preferredStyle: .alert)
+    private func presentAlertController(with message: String) {
+        
+        let alertController = UIAlertController(title: "Success", message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "Ok", style: .default) { _ in
             self.navigationController?.popViewController(animated: true)
         }
         alertController.addAction(action)
         present(alertController, animated: true)
+    }
+}
+
+
+extension UITextField {
+    func setTextInset(left: CGFloat = 24, right: CGFloat = 24) {
+        let leftPadding = UIView(frame: CGRect(x: 0, y: 0, width: left, height: 0))
+        self.leftView = leftPadding
+        self.leftViewMode = .always
+        
+        let rightPadding = UIView(frame: CGRect(x: 0, y: 0, width: right, height: 0))
+        self.rightView = rightPadding
+        self.rightViewMode = .always
     }
 }

@@ -10,6 +10,8 @@ import Foundation
 
 class ChatViewModel {
     
+    var chatClient: ChatClient?
+    
     var messages = [Message]() {
         didSet {
             isLoading = false
@@ -22,9 +24,14 @@ class ChatViewModel {
     var isLoading = true
     
     init() {
-        ChatClient.getMessages { messages in
-            self.messages = messages
-        }
+        chatClient = ChatClient()
+        chatClient?.fetchChatData({ messages in
+            if let messages = messages {
+                self.messages = messages
+            }
+        }, withError: { error in
+            print(error!)
+        })
     }
 }
 
