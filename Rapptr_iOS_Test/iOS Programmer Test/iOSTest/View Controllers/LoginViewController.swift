@@ -27,6 +27,9 @@ class LoginViewController: UIViewController {
      * 7) When login is successful, tapping 'OK' in the UIAlertController should bring you back to the main menu.
      **/
     
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    
     // MARK: - Properties
     private var client: LoginClient?
     
@@ -34,6 +37,16 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Login"
+        
+        let emailPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 24, height: 0))
+        emailTextField.leftView = emailPaddingView
+        emailTextField.leftViewMode = .always
+        emailTextField.layer.opacity = 0.5
+        
+        let passwordPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 24, height: 0))
+        passwordTextField.leftView = passwordPaddingView
+        passwordTextField.leftViewMode = .always
+        passwordTextField.layer.opacity = 0.5  
     }
     
     override func didReceiveMemoryWarning() {
@@ -41,12 +54,24 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Actions
-    @IBAction func backAction(_ sender: Any) {
-        let mainMenuViewController = MenuViewController()
-        self.navigationController?.pushViewController(mainMenuViewController, animated: true)
+    @IBAction func didPressLoginButton(_ sender: Any) {
+        let userEmail = emailTextField.text!
+        let userPassword = passwordTextField.text!
+        LoginClient.login(email: userEmail, password: userPassword) { success in
+            if success {
+                DispatchQueue.main.async {
+                    self.presentAlertController()
+                }
+            }
+        }
     }
     
-    @IBAction func didPressLoginButton(_ sender: Any) {
+    private func presentAlertController() {
+        let alertController = UIAlertController(title: "Success", message: "It took 3 seconds for the call", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .default) { _ in
+            self.navigationController?.popViewController(animated: true)
+        }
+        alertController.addAction(action)
+        present(alertController, animated: true)
     }
 }

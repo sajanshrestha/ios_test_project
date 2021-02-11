@@ -36,12 +36,52 @@ class MenuViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Coding Tasks"
+        setUpNavigationBar()
+        setUpButtons(chatButton, loginButton, animationButton)
+        
     }
     
-    // MARK: - Actions
+    // MARK: - Constants
+    private let navigationTitle = "Coding Tasks"
+    private let navigationTitleSize: CGFloat = 17.0
+    private let buttonsCornerRadius: CGFloat = 8.0
+}
+
+// MARK:- UI Configurations
+
+extension MenuViewController {
+ 
+    private func setUpNavigationBar() {
+        title = navigationTitle
+        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.05382280797, green: 0.3590119481, blue: 0.5361846685, alpha: 1)
+        let attributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.white,
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: navigationTitleSize, weight: .semibold)
+        ]
+        navigationController?.navigationBar.titleTextAttributes = attributes
+        navigationController?.navigationBar.tintColor = UIColor.white
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
+    }
+    
+    private func setUpButtons(_ buttons: UIButton...) {
+        buttons.forEach { button in
+            setInsets(for: button)
+            button.layer.cornerRadius = buttonsCornerRadius
+        }
+    }
+    
+    private func setInsets(for button: UIButton) {
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 22, bottom: 0, right: 0)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 62, bottom: 0, right: 0)
+    }
+}
+
+// MARK: - Actions
+extension MenuViewController {
     @IBAction func didPressChatButton(_ sender: Any) {
-        let chatViewController = ChatViewController()
+        let chatViewModel = ChatViewModel()
+        let chatViewController = ChatViewController(model: chatViewModel)
         navigationController?.pushViewController(chatViewController, animated: true)
     }
     

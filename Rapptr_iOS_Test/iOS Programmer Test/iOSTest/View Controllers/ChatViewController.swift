@@ -22,65 +22,75 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
      **/
     
     // MARK: - Properties
-    private var client: ChatClient?
-    private var messages: [Message]?
+    var model: ChatViewModel
     
     // MARK: - Outlets
     @IBOutlet weak var chatTable: UITableView!
     
+    init(model: ChatViewModel) {
+        self.model = model
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        messages = [Message]()
-        configureTable(tableView: chatTable)
         title = "Chat"
         
-        // TODO: Remove test data when we have actual data from the server loaded
-        messages?.append(Message(testName: "James", withTestMessage: "Hey Guys!"))
-        messages?.append(Message(testName:"Paul", withTestMessage:"What's up?"))
-        messages?.append(Message(testName:"Amy", withTestMessage:"Hey! :)"))
-        messages?.append(Message(testName:"James", withTestMessage:"Want to grab some food later?"))
-        messages?.append(Message(testName:"Paul", withTestMessage:"Sure, time and place?"))
-        messages?.append(Message(testName:"Amy", withTestMessage:"YAS! I am starving!!!"))
-        messages?.append(Message(testName:"James", withTestMessage:"1 hr at the Local Burger sound good?"))
-        messages?.append(Message(testName:"Paul", withTestMessage:"Sure thing"))
-        messages?.append(Message(testName:"Amy", withTestMessage:"See you there :P"))
+        configureTable()
         
-        chatTable.reloadData()
+        model.delegate = self
     }
     
     // MARK: - Private
-    private func configureTable(tableView: UITableView) {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(UINib(nibName: "ChatTableViewCell", bundle: nil), forCellReuseIdentifier: "ChatTableViewCell")
-        tableView.tableFooterView = UIView(frame: .zero)
+    private func configureTable() {
+        chatTable.delegate = self
+        chatTable.dataSource = self
+        chatTable.register(ChatTableViewCell.self, forCellReuseIdentifier: ChatTableViewCell.identifier)
+        //tableView.tableFooterView = UIView(frame: .zero)
+        chatTable.separatorStyle = .none
+        chatTable.rowHeight = UITableView.automaticDimension
+        chatTable.estimatedRowHeight = 600
+        chatTable.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
     }
-    
+        
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell: ChatTableViewCell? = nil
-        if cell == nil {
-            let nibs = Bundle.main.loadNibNamed("ChatTableViewCell", owner: self, options: nil)
-            cell = nibs?[0] as? ChatTableViewCell
-        }
-        cell?.setCellData(message: messages![indexPath.row])
+        let cell = tableView.dequeueReusableCell(withIdentifier: ChatTableViewCell.identifier) as? ChatTableViewCell
+        let message = model.messages[indexPath.row]
+        cell?.avatarImageView.image = getImage(for: message.avatarUrl)
+        cell?.header.text = message.name
+        cell?.body.text = message.message
         return cell!
     }
     
+    private func getImage(for url: String) -> UIImage {
+        var image = UIImage()
+        do {
+            if let url = URL(string: url) {
+                let data = try Data(contentsOf: url)
+                image = UIImage(data: data) ?? UIImage()
+            }
+        }
+        catch {
+            print("error")
+        }
+        return image
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messages!.count
+        model.messages.count
     }
     
-    // MARK: - UITableViewDelegate
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 58.0
-    }
-    
-    // MARK: - IBAction
-    @IBAction func backAction(_ sender: Any) {
-        let mainMenuViewController = MenuViewController()
-        self.navigationController?.pushViewController(mainMenuViewController, animated: true)
+}
+
+
+extension ChatViewController: ChatMessageDelegate {
+    func didSetMessages() {
+        chatTable.reloadData()
     }
 }
