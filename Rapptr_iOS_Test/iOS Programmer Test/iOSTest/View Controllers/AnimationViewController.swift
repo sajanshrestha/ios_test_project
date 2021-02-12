@@ -32,8 +32,8 @@ class AnimationViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Animation"
         
+        title = "Animation"
         addPanGesture()
         addAnimationView()
         animationView.isHidden = true
@@ -75,7 +75,11 @@ class AnimationViewController: UIViewController {
     }
 
     @IBAction func didPressFade(_ sender: Any) {
+        
+        // toggles opacity
         logoImageView.fade(duration: animationDuration)
+        
+        // updates button title and animation view based on logo's visibility
         updateButtonTitle()
         updateAnimationView()
     }
@@ -115,14 +119,4 @@ class AnimationViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-}
-
-
-extension UIView {
-    
-    func fade(duration: TimeInterval) {
-        UIView.animate(withDuration: duration) {
-            self.layer.opacity = self.layer.opacity == 0.0 ? 1.0 : 0.0
-        }
-    }
 }

@@ -26,11 +26,16 @@
     [self.navController setNavigationBarHidden:NO];
     self.window.rootViewController = self.navController;
     
+    // customizes SVProgressHUD loading indicator
     [SVProgressHUD setRingRadius:1.0];
     [SVProgressHUD setForegroundColor:UIColor.blueColor];
     
-
     return YES;
+}
+
+- (void) configureProgressIndicator
+{
+    
 }
 
 @end

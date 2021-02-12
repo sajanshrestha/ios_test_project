@@ -12,8 +12,9 @@ class ChatRoom {
     
     var messages = [Message]() {
         didSet {
+            // this delay is just to simulate a little longer network call
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                self.isLoading = false
+                self.isLoadingMessages = false
                 self.delegate.didSetMessages()
             }
         }
@@ -21,7 +22,7 @@ class ChatRoom {
     
     var delegate: ChatMessageDelegate!
     
-    var isLoading = true
+    var isLoadingMessages = true
     
     init() {
         chatClient = ChatClient()
@@ -34,14 +35,13 @@ class ChatRoom {
         })
     }
     
-    private var chatClient: ChatClient?
-
+    private var chatClient: ChatClient!
     
-    func avatarImage(for string: String) -> UIImage? {
+    func cachedAvatarImage(for string: String) -> UIImage? {
         cachedAvatarImages[string]
     }
     
-    func cacheAvatarImage(key: String, image: UIImage) {
+    func cacheAvatarImage(_ image: UIImage, key: String) {
         cachedAvatarImages[key] = image
     }
     

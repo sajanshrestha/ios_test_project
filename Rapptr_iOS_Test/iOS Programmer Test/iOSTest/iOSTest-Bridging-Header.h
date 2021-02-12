@@ -3,5 +3,6 @@
 //
 
 #import "ChatClient.h"
+#import "LoginClient.h"
 #import "Message.h"
 

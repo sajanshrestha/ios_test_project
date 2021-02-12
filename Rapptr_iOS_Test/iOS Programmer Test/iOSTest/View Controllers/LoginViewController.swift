@@ -55,9 +55,13 @@ class LoginViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        client = nil
     }
     
     @IBAction func didPressLoginButton(_ sender: Any) {
+        
+        client = LoginClient()
+        
         let userEmail = emailTextField.text!
         let userPassword = passwordTextField.text!
         
@@ -68,19 +72,24 @@ class LoginViewController: UIViewController {
             return
         }
         
-        LoginClient.login(email: userEmail, password: userPassword) { success, timeInterval in
+        client?.login(withEmail: userEmail, password: userPassword, completion: { responseDictionary in
+            
+            let success = responseDictionary?["Success"] as? Bool ?? false
+            let timeTaken = responseDictionary?["NetworkingTime"] as? NSNumber ?? 0
+            
             if success {
                 DispatchQueue.main.async {
-                    let message = "Time taken: \(Int(Double(timeInterval ?? TimeInterval.zero) * 1000)) milliseconds"
-                    self.presentAlertController(title: "Success", message: message) {
+                    self.presentAlertController(title: "Success", message: "Time Taken: \(abs(timeTaken.intValue)) ms") {
                         self.navigationController?.popViewController(animated: true)
                     }
                 }
             }
             else {
-                print("howdy")
+                print("not awesome")
             }
-        }
+            
+        })
+        
     }
     
     private func presentAlertController(title: String, message: String, action: @escaping () -> Void) {

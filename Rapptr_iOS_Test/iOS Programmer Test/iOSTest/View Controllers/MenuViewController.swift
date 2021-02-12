@@ -94,7 +94,7 @@ extension MenuViewController {
 // MARK: - Actions
 extension MenuViewController {
     @IBAction func didPressChatButton(_ sender: Any) {
-        let chatViewModel = ChatViewModel()
+        let chatViewModel = ChatRoom()
         let chatViewController = ChatViewController(model: chatViewModel)
         navigationController?.pushViewController(chatViewController, animated: true)
     }

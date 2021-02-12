@@ -31,14 +31,14 @@ class ChatViewController: UIViewController {
     
     
     // MARK: - Properties
-    var model: ChatViewModel
+    var chatRoom: ChatRoom
     
     // MARK: - Outlets
     @IBOutlet weak var chatTable: UITableView!
     
     // MARK: - Initializerss
-    init(model: ChatViewModel) {
-        self.model = model
+    init(model: ChatRoom) {
+        self.chatRoom = model
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -57,7 +57,7 @@ class ChatViewController: UIViewController {
         
         title = "Chat"
         configureTable()
-        model.delegate = self
+        chatRoom.delegate = self
         
         updateUIwithLoadingStatus()
     }
@@ -74,7 +74,7 @@ class ChatViewController: UIViewController {
     }
     
     private func updateUIwithLoadingStatus() {
-        if model.isLoading {
+        if chatRoom.isLoadingMessages {
             SVProgressHUD.show()
             chatTable.isHidden = true
         }
@@ -83,21 +83,9 @@ class ChatViewController: UIViewController {
             chatTable.isHidden = false
         }
     }
-      
-    private func getImage(for url: URL) -> UIImage {
-        var image = UIImage(named: "user")!
-        do {
-            let data = try Data(contentsOf: url)
-            image = UIImage(data: data) ?? UIImage()
-        }
-        catch {
-            print("error")
-        }
-        return image
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        model.messages.count
+        chatRoom.messages.count
     }
 }
 
@@ -106,11 +94,37 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ChatTableViewCell.identifier) as! ChatTableViewCell
-        let message = model.messages[indexPath.row]
+        let message = chatRoom.messages[indexPath.row]
         cell.header.text = message.username
         cell.body.text = message.text
-        cell.avatarImageView.image = getImage(for:  message.avatarURL)
+        
+        // sets placeholder image (if there is delay or any error while fetching, cell will still have a default image)
+        cell.avatarImageView.image = UIImage(named: "user")!
+        
+        setAvatarImage(for: message, in: cell)
+        
         return cell
+    }
+    
+    // if successful, places the fetched imaged on cell
+    private func setAvatarImage(for message: Message, in cell: ChatTableViewCell) {
+        if let image = chatRoom.cachedAvatarImage(for: message.avatarURL.absoluteString) {
+            cell.avatarImageView.image = image
+        }
+        else {
+            downloadAvatarImage(of: message, for: cell)
+        }
+    }
+    
+    private func downloadAvatarImage(of message: Message, for cell: ChatTableViewCell) {
+        ImageClient.image(for: message.avatarURL) { image in
+            DispatchQueue.main.async {
+                cell.avatarImageView.image = image
+            }
+            if let image = image {
+                self.chatRoom.cacheAvatarImage(image, key: message.avatarURL.absoluteString)
+            }
+        }
     }
 }
 
