@@ -20,6 +20,13 @@ class ChatViewController: UIViewController {
      *
      * 3) Parse the chat data using 'Message' model
      *
+     *
+     * 􀓣 ======================================================================================== 􀓣
+     * This view controller has a property called "model" which acts as a view model. This view model is responsible for providing all the "messages" to the table view. To do so, the view model makes a network
+     * call during initialization. If successful, it will populate 'messages' property in it. Once the 'messages' property is set, the model asks its delegate to carry out necessary action. In this case, the delegate is
+     * this view controller. And when the "messages" are populated, the view controller reloads its table view and thus displaying the messages.
+     * 􀓣 ======================================================================================== 􀓣
+
      **/
     
     
@@ -103,10 +110,6 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
         cell.header.text = message.username
         cell.body.text = message.text
         cell.avatarImageView.image = getImage(for:  message.avatarURL)
-
-//        cell.avatarImageView.image = getImage(for: message.avatarUrl)
-//        cell.header.text = message.name
-//        cell.body.text = message.message
         return cell
     }
 }
@@ -114,15 +117,9 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension ChatViewController: ChatMessageDelegate {
     func didSetMessages() {
-        DispatchQueue.main.async { [self] in
-            
-            // this delay is just to simulate a little longer network call
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                updateUIwithLoadingStatus()
-                self.chatTable.reloadData()
-            }
+        DispatchQueue.main.async {
+            self.updateUIwithLoadingStatus()
+            self.chatTable.reloadData()
         }
     }
 }
-
-

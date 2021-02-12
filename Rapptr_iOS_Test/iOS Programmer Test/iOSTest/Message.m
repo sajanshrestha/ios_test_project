@@ -17,7 +17,7 @@
     if (self)
     {
         self.userID = dictionary[@"user_id"];
-        self.username = dictionary[@"username"];
+        self.username = dictionary[@"name"];
         self.avatarURL = [NSURL URLWithString:dictionary[@"avatar_url"]];
         self.text = dictionary[@"message"];
     }

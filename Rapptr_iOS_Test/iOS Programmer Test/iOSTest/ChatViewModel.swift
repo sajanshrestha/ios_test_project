@@ -14,8 +14,10 @@ class ChatViewModel {
     
     var messages = [Message]() {
         didSet {
-            isLoading = false
-            delegate.didSetMessages()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.isLoading = false
+                self.delegate.didSetMessages()
+            }
         }
     }
     

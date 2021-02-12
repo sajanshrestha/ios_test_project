@@ -60,21 +60,34 @@ class LoginViewController: UIViewController {
     @IBAction func didPressLoginButton(_ sender: Any) {
         let userEmail = emailTextField.text!
         let userPassword = passwordTextField.text!
+        
+        guard !userEmail.isEmpty && !userPassword.isEmpty else {
+            presentAlertController(title: "Error", message: "Please enter both username and password.") {
+                print("fields empty")
+            }
+            return
+        }
+        
         LoginClient.login(email: userEmail, password: userPassword) { success, timeInterval in
             if success {
                 DispatchQueue.main.async {
-                    let message = "Time taken: \(Double(timeInterval ?? TimeInterval.zero) * 1000) milliseconds"
-                    self.presentAlertController(with: message)
+                    let message = "Time taken: \(Int(Double(timeInterval ?? TimeInterval.zero) * 1000)) milliseconds"
+                    self.presentAlertController(title: "Success", message: message) {
+                        self.navigationController?.popViewController(animated: true)
+                    }
                 }
+            }
+            else {
+                print("howdy")
             }
         }
     }
     
-    private func presentAlertController(with message: String) {
+    private func presentAlertController(title: String, message: String, action: @escaping () -> Void) {
         
-        let alertController = UIAlertController(title: "Success", message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "Ok", style: .default) { _ in
-            self.navigationController?.popViewController(animated: true)
+            action()
         }
         alertController.addAction(action)
         present(alertController, animated: true)

@@ -15,6 +15,13 @@ class ChatTableViewCell: UITableViewCell {
      * 1) Setup cell to match mockup
      *
      * 2) Include user's avatar image
+     *
+     ** =========================================================================================
+     *
+     *
+     * 􀓣 ======================================================================================== 􀓣
+     * Used programmatic approach to create UI elements.
+     * 􀓣 ======================================================================================== 􀓣
      **/
     
     static let identifier = "ChatTableViewCell"

@@ -26,6 +26,20 @@ class MenuViewController: UIViewController {
      *
      * Thank you and Good luck. - Rapptr Labs
      * =========================================================================================
+     *
+     *
+     * 􀓣 ======================================================================================== 􀓣
+     *
+     * 1) I have created UI elements both in xib file and programmatically.
+     *
+     * 2) I have used MVVM architecture for this project. The goal was to have only view logic inside view controllers.
+     *
+     * 3) I have comments in some sections of the source code to explain my intent.
+     *
+     * Thank you, I had fun working on this test project. - Sajan Shrestha
+     *
+     * 􀓣 ======================================================================================== 􀓣
+     
      */
     
     // MARK: - Outlets

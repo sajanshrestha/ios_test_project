@@ -115,6 +115,14 @@
 			name = "Extension Files";
 			sourceTree = "<group>";
 		};
+		A1ACA0C325D5E9F70082F4A1 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				A18061E625D4DB4200856E6E /* ChatViewModel.swift */,
+			);
+			name = "View Models";
+			sourceTree = "<group>";
+		};
 		BD0374F39C647A31190304BB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,10 +163,11 @@
 			isa = PBXGroup;
 			children = (
 				6900F5E021BF4726007AFBB8 /* Assets.xcassets */,
-				F2837BEE1D9AE99D00A57AC8 /* Clients */,
-				F273B63E1D95BD360069037F /* Models */,
-				F273B62D1D95B1B70069037F /* Views */,
 				F264BDB81D7F503A00275D46 /* View Controllers */,
+				F273B62D1D95B1B70069037F /* Views */,
+				A1ACA0C325D5E9F70082F4A1 /* View Models */,
+				F273B63E1D95BD360069037F /* Models */,
+				F2837BEE1D9AE99D00A57AC8 /* Clients */,
 				A1ACA0B525D5E3990082F4A1 /* Media Files */,
 				F264BD9C1D7F4F0400275D46 /* Supporting Files */,
 				A1ACA0B725D5E3F60082F4A1 /* Extension Files */,
@@ -211,7 +220,6 @@
 		F273B63E1D95BD360069037F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A18061E625D4DB4200856E6E /* ChatViewModel.swift */,
 				A1ACA0AC25D5CC860082F4A1 /* Message.h */,
 				A1ACA0AE25D5D3D10082F4A1 /* Message.m */,
 			);
@@ -297,7 +305,7 @@
 		F264BD911D7F4F0400275D46 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "D&ATechnologies";
 				TargetAttributes = {
 					F264BD981D7F4F0400275D46 = {
@@ -437,6 +445,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -461,7 +470,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -492,6 +501,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -510,7 +520,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -531,6 +541,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = iOSTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -559,6 +570,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = iOSTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
