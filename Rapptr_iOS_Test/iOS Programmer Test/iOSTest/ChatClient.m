@@ -27,6 +27,7 @@
 - (void)fetchChatData:(void (^)(NSArray<Message *> *))completion withError:(void (^)(NSString *error))errorBlock
 {
     NSString *urlString = @"http://dev.rapptrlabs.com/Tests/scripts/chat_log.php";
+
     NSURL *url = [NSURL URLWithString:urlString];
     [[NSURLSession.sharedSession dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         

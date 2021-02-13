@@ -15,3 +15,15 @@ extension UIView {
         }
     }
 }
+
+extension UITextField {
+    func setTextInset(left: CGFloat = 24, right: CGFloat = 24) {
+        let leftPadding = UIView(frame: CGRect(x: 0, y: 0, width: left, height: 0))
+        self.leftView = leftPadding
+        self.leftViewMode = .always
+        
+        let rightPadding = UIView(frame: CGRect(x: 0, y: 0, width: right, height: 0))
+        self.rightView = rightPadding
+        self.rightViewMode = .always
+    }
+}

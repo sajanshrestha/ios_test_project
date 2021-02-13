@@ -1,28 +1,25 @@
 //
 //  AudioPlayer.swift
-//  MathForFun
+//  iOSTest
 //
-//  Created by Sajan Shrestha on 7/3/20.
-//  Copyright © 2020 Sajan Shrestha. All rights reserved.
+//  Created by Sajan Shrestha on 2/12/21.
+//  Copyright © 2021 D&ATechnologies. All rights reserved.
 //
 
+import Foundation
 import AVFoundation
 
 struct AudioPlayer {
-        
-    static var audioPlayer: AVAudioPlayer!
     
-    static func playSound(for file: String) {
+    static func playSound(with file: String) {
         
-        guard let sound = Bundle.main.path(forResource: file, ofType: "mp3") else { return }
+        guard let soundUrl = Bundle.main.url(forResource: file, withExtension: "mp3") else { return }
+        var sound: SystemSoundID = 0
         
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound))
-            audioPlayer.play()
-            
-        } catch {
-            print("error playing sound")
+        AudioServicesCreateSystemSoundID(soundUrl as CFURL, &sound)
+        
+        AudioServicesPlaySystemSoundWithCompletion(sound) {
+            AudioServicesDisposeSystemSoundID(sound)
         }
-        
     }
 }

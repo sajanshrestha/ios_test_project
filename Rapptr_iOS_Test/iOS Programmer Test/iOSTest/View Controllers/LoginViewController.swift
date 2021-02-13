@@ -66,7 +66,7 @@ class LoginViewController: UIViewController {
         let userPassword = passwordTextField.text!
         
         guard !userEmail.isEmpty && !userPassword.isEmpty else {
-            presentAlertController(title: "Error", message: "Please enter both username and password.") {
+            presentAlertController(title: "Error", message: "Please enter both email and password.") {
                 print("fields empty")
             }
             return
@@ -85,11 +85,11 @@ class LoginViewController: UIViewController {
                 }
             }
             else {
-                print("not awesome")
+                self.presentAlertController(title: "Error", message: "Login Unsuccessful") {
+                    print("login failed")
+                }
             }
-            
         })
-        
     }
     
     private func presentAlertController(title: String, message: String, action: @escaping () -> Void) {
@@ -100,18 +100,5 @@ class LoginViewController: UIViewController {
         }
         alertController.addAction(action)
         present(alertController, animated: true)
-    }
-}
-
-
-extension UITextField {
-    func setTextInset(left: CGFloat = 24, right: CGFloat = 24) {
-        let leftPadding = UIView(frame: CGRect(x: 0, y: 0, width: left, height: 0))
-        self.leftView = leftPadding
-        self.leftViewMode = .always
-        
-        let rightPadding = UIView(frame: CGRect(x: 0, y: 0, width: right, height: 0))
-        self.rightView = rightPadding
-        self.rightViewMode = .always
     }
 }

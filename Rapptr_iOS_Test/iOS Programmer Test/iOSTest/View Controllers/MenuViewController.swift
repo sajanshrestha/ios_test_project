@@ -34,7 +34,9 @@ class MenuViewController: UIViewController {
      *
      * 2) I have used MVVM architecture for this project. The goal was to have only view logic inside view controllers.
      *
-     * 3) I have comments in some sections of the source code to explain my intent.
+     * 3) For avatar images in ChatViewController's cells, I used caching. For this project it will not make a difference, because the data set is small and there is no scrolling involved on table view. However, if the data set was large, caching would prevent repeated fetching of same avatar image and thus will be more efficient.
+     *
+     * 4) Lastly, I have comments in some sections of the source code to explain my thought process.
      *
      * Thank you, I had fun working on this test project. - Sajan Shrestha
      *
@@ -75,7 +77,6 @@ extension MenuViewController {
         navigationController?.navigationBar.titleTextAttributes = attributes
         navigationController?.navigationBar.tintColor = UIColor.white
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-
     }
     
     private func setUpButtons(_ buttons: UIButton...) {

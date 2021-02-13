@@ -12,12 +12,12 @@
 		A10613D225D59AAD00D91DE8 /* fireworks.json in Resources */ = {isa = PBXBuildFile; fileRef = A10613D125D59AAD00D91DE8 /* fireworks.json */; };
 		A159471625D6C15300663A84 /* LoginClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A159471525D6C15300663A84 /* LoginClient.m */; };
 		A159471B25D6D90800663A84 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A159471A25D6D90800663A84 /* Extensions.swift */; };
-		A15A47EB25D498F100553925 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15A47EA25D498F100553925 /* AudioPlayer.swift */; };
 		A18061DD25D4D1A700856E6E /* logo_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A18061DC25D4D1A700856E6E /* logo_sound.mp3 */; };
 		A18061E725D4DB4200856E6E /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18061E625D4DB4200856E6E /* ChatRoom.swift */; };
 		A18E3B0C25D714AE001CDC4A /* ImageClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18E3B0B25D714AE001CDC4A /* ImageClient.swift */; };
 		A1ACA0AA25D5CC660082F4A1 /* ChatClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A1ACA0A925D5CC660082F4A1 /* ChatClient.m */; };
 		A1ACA0AF25D5D3D10082F4A1 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = A1ACA0AE25D5D3D10082F4A1 /* Message.m */; };
+		A1D54C2025D773C700A2C2AF /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D54C1F25D773C700A2C2AF /* AudioPlayer.swift */; };
 		A3E2089E0F78A14100A8642B /* Pods_iOSTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1834C4A0727BCF5D4F0F3C9A /* Pods_iOSTest.framework */; };
 		F21312E11E0485B50029E33F /* AnimationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F21312DF1E0485B50029E33F /* AnimationViewController.xib */; };
 		F2603FCB202A404D001BCA22 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2603FC9202A404D001BCA22 /* ChatTableViewCell.swift */; };
@@ -43,7 +43,6 @@
 		A159471425D6C13E00663A84 /* LoginClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginClient.h; sourceTree = "<group>"; };
 		A159471525D6C15300663A84 /* LoginClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginClient.m; sourceTree = "<group>"; };
 		A159471A25D6D90800663A84 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		A15A47EA25D498F100553925 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		A18061DC25D4D1A700856E6E /* logo_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = logo_sound.mp3; sourceTree = "<group>"; };
 		A18061E625D4DB4200856E6E /* ChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
 		A18061EE25D58B2A00856E6E /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,6 +51,7 @@
 		A1ACA0A925D5CC660082F4A1 /* ChatClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatClient.m; sourceTree = "<group>"; };
 		A1ACA0AC25D5CC860082F4A1 /* Message.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		A1ACA0AE25D5D3D10082F4A1 /* Message.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		A1D54C1F25D773C700A2C2AF /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		CE4E9272792E9F1734A87696 /* Pods-iOSTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSTest.debug.xcconfig"; path = "Target Support Files/Pods-iOSTest/Pods-iOSTest.debug.xcconfig"; sourceTree = "<group>"; };
 		F21312DF1E0485B50029E33F /* AnimationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AnimationViewController.xib; path = "View Controllers/AnimationViewController.xib"; sourceTree = "<group>"; };
 		F2603FC9202A404D001BCA22 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatTableViewCell.swift; path = Views/Cells/ChatTableViewCell.swift; sourceTree = "<group>"; };
@@ -175,10 +175,10 @@
 				A1ACA0B525D5E3990082F4A1 /* Media Files */,
 				F264BD9C1D7F4F0400275D46 /* Supporting Files */,
 				A1ACA0B725D5E3F60082F4A1 /* Extension Files */,
-				A15A47EA25D498F100553925 /* AudioPlayer.swift */,
 				F264BDAD1D7F4F0500275D46 /* Info.plist */,
 				F264BDA01D7F4F0400275D46 /* AppDelegate.m */,
 				F264BD9F1D7F4F0400275D46 /* AppDelegate.h */,
+				A1D54C1F25D773C700A2C2AF /* AudioPlayer.swift */,
 			);
 			path = iOSTest;
 			sourceTree = "<group>";
@@ -411,7 +411,6 @@
 				F2603FD2202A4089001BCA22 /* LoginViewController.swift in Sources */,
 				F2603FD4202A4092001BCA22 /* MenuViewController.swift in Sources */,
 				A1ACA0AF25D5D3D10082F4A1 /* Message.m in Sources */,
-				A15A47EB25D498F100553925 /* AudioPlayer.swift in Sources */,
 				F264BDA11D7F4F0400275D46 /* AppDelegate.m in Sources */,
 				A159471B25D6D90800663A84 /* Extensions.swift in Sources */,
 				F2603FD0202A4083001BCA22 /* ChatViewController.swift in Sources */,
@@ -421,6 +420,7 @@
 				F2603FCB202A404D001BCA22 /* ChatTableViewCell.swift in Sources */,
 				A18061E725D4DB4200856E6E /* ChatRoom.swift in Sources */,
 				F264BD9E1D7F4F0400275D46 /* main.m in Sources */,
+				A1D54C2025D773C700A2C2AF /* AudioPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,6 +559,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "iOSTest/iOSTest-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -587,6 +588,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "iOSTest/iOSTest-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;

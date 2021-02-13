@@ -45,6 +45,7 @@ class ChatRoom {
         cachedAvatarImages[key] = image
     }
     
+    // This dictionary is used to cache fetched avatar images. The goal is to check this dictionary first before making a network call.
     private var cachedAvatarImages = [String: UIImage]()
 }
 

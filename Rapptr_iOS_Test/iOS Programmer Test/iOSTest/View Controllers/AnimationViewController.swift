@@ -45,17 +45,6 @@ class AnimationViewController: UIViewController {
         logoImageView.addGestureRecognizer(panGesture)
     }
     
-    private func addAnimationView() {
-        animationContainerView.addSubview(animationView)
-        
-        NSLayoutConstraint.activate([
-            animationView.topAnchor.constraint(equalTo: view.topAnchor),
-            animationView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            animationView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            animationView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-    }
-    
     @objc func handlePanGesture(gesture: UIPanGestureRecognizer) {
         
         if gesture.state == .changed {
@@ -71,7 +60,18 @@ class AnimationViewController: UIViewController {
         UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: .curveEaseIn) {
             self.logoImageView.transform = .identity
         }
-        AudioPlayer.playSound(for: "logo_sound")
+        AudioPlayer.playSound(with: "logo_sound")
+    }
+    
+    private func addAnimationView() {
+        animationContainerView.addSubview(animationView)
+        
+        NSLayoutConstraint.activate([
+            animationView.topAnchor.constraint(equalTo: view.topAnchor),
+            animationView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            animationView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            animationView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
     }
 
     @IBAction func didPressFade(_ sender: Any) {
@@ -91,6 +91,7 @@ class AnimationViewController: UIViewController {
     
     private func updateAnimationView() {
         if logoVisible {
+            // After the logo fades in with animation, the firework animation starts.
             DispatchQueue.main.asyncAfter(deadline: .now() + animationDuration) {
                 self.animationView.isHidden = false
                 self.animationView.play()
@@ -108,7 +109,6 @@ class AnimationViewController: UIViewController {
     
     // MARK: - Constants
     private let animationDuration: TimeInterval = 1.0
-    
     
     // MARK: - Views
     var animationView: AnimationView = {

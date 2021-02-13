@@ -8,9 +8,9 @@
 
 import UIKit
 
-struct ImageClient {
+struct ImageDownloader {
     
-    static func image(for url: URL, completion: @escaping (UIImage?) -> Void) {
+    static func downloadImage(with url: URL, completion: @escaping (UIImage?) -> Void) {
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let data = data {
                 let image = UIImage(data: data)
